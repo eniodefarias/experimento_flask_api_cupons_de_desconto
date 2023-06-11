@@ -214,7 +214,7 @@ Isso vai executar todos os testes definidos na classe TestApp e mostrar os resul
 
 
 
-## Testando
+# Testando
 
 para testar essa API REST, pode-se usar alguma ferramenta como o Postman ou o cURL. Por exemplo, para cadastrar um cupom usando o cURL, você pode usar o seguinte comando:
 
@@ -227,3 +227,63 @@ Para consumir um cupom usando o cURL, você pode usar o seguinte comando:
 ```bash
 curl -X POST -H "Content-Type: application/json" -d '{"total_value": 150, "first_purchase": true}' http://localhost:5000/coupons/ABC123
 ```
+
+# Dicas
+
+## criando o ambiente de produção
+ 
+ - clonando o REPO:
+```bash
+    git clone https://github.com/eniodefarias/experimento_flask_api_cupons_de_desconto
+    cd experimento_flask_api_cupons_de_desconto
+```
+
+### criando o .venv
+ - gerando o .venv, no linux:
+```bash
+    /home/$(whoami)/.pyenv/shims/python3 -m venv .venv
+```
+ - gerando o .venv, no windows, com o gitbash
+```bash
+    /c/Users/$(whoami)/AppData/Local/Programs/Python/Python39/python.exe -m venv .venv
+```
+ - gerando o .venv, no windows, com o cmd do DOS:
+```bash
+    C:\Users\user\AppData\Local\Programs\Python\Python39\python.exe -m venv .venv
+```
+
+### importando os requirements
+
+ - no linux
+```bash
+     cat requirements.txt|sort|uniq | xargs -n 1 .venv/bin/pip install; .venv/bin/pip --upgrade pip ; .venv/bin/python3 -m pip install --upgrade pip
+```
+ - no windows, com o gitbash
+```bash
+     cat requirements.txt|sort|uniq | xargs -n 1 .venv/Scripts/pip3.exe install; .venv/Scripts/pip3.exe install --upgrade pip ; .venv/Scripts/python.exe -m pip install --upgrade pip
+```
+
+### executando
+
+- no linux
+```bash
+     .venv/bin/python3 app.py
+```
+- no windows, com o gitbash
+```bash
+      .venv/Scripts/python.exe  app.py
+```
+
+
+## consultando a base de dados:
+
+Para consultar as tabelas criadas no SQLite usando uma aplicação como o DBeaver, você precisa seguir os seguintes passos:
+
+ - Baixar e instalar o DBeaver na sua máquina. Você pode baixar o DBeaver gratuitamente no site oficial1.
+ - Abrir o DBeaver e clicar no botão New Connection para criar uma nova conexão com o banco de dados SQLite.
+ - Na janela Create new connection, selecionar o driver SQLite na lista de drivers disponíveis e clicar no botão Next.
+ - Na próxima janela, clicar no botão Browse para escolher o arquivo do banco de dados SQLite que você quer consultar. Por exemplo, se você criou um banco de dados chamado coupons.db na mesma pasta da aplicação, você pode selecionar esse arquivo. Depois, clicar no botão Next.
+ - Na última janela, clicar no botão Finish para finalizar a criação da conexão. Você pode alterar o nome da conexão ou outras configurações se quiser.
+ - Agora, você pode ver a conexão criada na aba Database Navigator do DBeaver. Você pode expandir a conexão para ver as tabelas do banco de dados SQLite. Por exemplo, se você criou as tabelas Coupon e Use na aplicação, você pode ver essas tabelas na conexão.
+ - Para consultar uma tabela, você pode clicar com o botão direito do mouse sobre ela e escolher a opção View Data. Isso vai abrir uma aba com os dados da tabela. Você pode filtrar, ordenar, editar ou exportar os dados da tabela usando as opções disponíveis na aba.
+ - Para executar uma consulta SQL no banco de dados SQLite, você pode clicar com o botão direito do mouse sobre a conexão e escolher a opção SQL Editor. Isso vai abrir uma aba com um editor de SQL. Você pode digitar a consulta SQL que você quer executar e clicar no botão Execute SQL Statement ou pressionar Ctrl+Enter. O resultado da consulta vai aparecer em outra aba.

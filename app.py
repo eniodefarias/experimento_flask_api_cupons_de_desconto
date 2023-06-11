@@ -74,14 +74,31 @@ def create_coupon():
         return jsonify({'error': 'Tipo de desconto inválido'}), 400
 
     # Criando o objeto do cupom e salvando no banco de dados
-    coupon = Coupon(code=code, expiration_date=expiration_date, max_uses=max_uses, min_value=min_value, discount_type=discount_type, discount_amount=discount_amount, public=public, first_purchase=first_purchase)
+    coupon = Coupon(code=code,
+                    expiration_date=expiration_date,
+                    max_uses=max_uses,
+                    min_value=min_value,
+                    discount_type=discount_type,
+                    discount_amount=discount_amount,
+                    public=public,
+                    first_purchase=first_purchase)
 
     db.session.add(coupon)
     db.session.commit()
 
     # Retornando uma resposta de sucesso com os dados do cupom criado
-    return jsonify({'id': coupon.id, 'code': coupon.code, 'expiration_date': coupon.expiration_date.isoformat(), 'max_uses': coupon.max_uses, 'min_value': coupon.min_value, 'discount_type': coupon.discount_type, 'discount_amount': coupon.discount_amount, 'public': coupon.public, 'first_purchase': coupon.first_purchase}), 201
+    return jsonify({'id': coupon.id,
+                    'code': coupon.code,
+                    'expiration_date': coupon.expiration_date.isoformat(),
+                    'max_uses': coupon.max_uses,
+                    'min_value': coupon.min_value,
+                    'discount_type': coupon.discount_type,
+                    'discount_amount': coupon.discount_amount,
+                    'public': coupon.public,
+                    'first_purchase': coupon.first_purchase}), 201
 
+    # ou Retornar uma resposta com o cupom criado
+    # return jsonify(coupon.__dict__), 201
 
 # Definindo o endpoint para consumo dos cupons
 @app.route('/coupons/<code>', methods=['POST'])
@@ -142,4 +159,4 @@ def use_coupon(code):
 
 # Executando a aplicação Flask
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, port=5000)
